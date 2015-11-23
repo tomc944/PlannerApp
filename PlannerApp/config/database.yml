@@ -1,0 +1,23 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+
+  pool: 5
+
+development:
+  <<: *default
+  database: PlannerApp_development
+
+
+test:
+  <<: *default
+  database: PlannerApp_test
+
+
+
+#
+production:
+  <<: *default
+  database: PlannerApp_production
+  username: PlannerApp
+  password: <%= ENV['PLANNERAPP_DATABASE_PASSWORD'] %>
