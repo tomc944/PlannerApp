@@ -83,3 +83,26 @@ RSpec.configure do |config|
   Kernel.srand config.seed
 =end
 end
+
+def log_out_sign_in
+  click_button "Log Out"
+  click_on "Sign Up"
+  fill_in "Username", with: "Whiskers"
+  fill_in "Password", with: "password"
+  click_button "Sign Up"
+end
+
+def create_gizmo_and_goal
+    visit "/users/new"
+    fill_in "Username", with: "Gizmo"
+    fill_in "Password", with: "password"
+    click_button "Sign Up"
+    create_goal("learn to juggle")
+end
+
+def create_private_goal_and_navigate_to_gizmo
+  create_goal("learn to ride a bike", "Private")
+  log_out_sign_in
+  click_on("All Users")
+  click_on("Gizmo")
+end

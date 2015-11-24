@@ -1,1 +1,38 @@
-<h1>Welcome <%= @user.username %></h1>
+<h2><%= @user.username %> Goals</h2>
+<ul>
+<% @user.goals.each do |goal| %>
+ <% if @user.id == current_user.id %>
+    <%= goal.body %>
+    <%= button_to "Update Goal!", edit_goal_url(goal), method: :get %>
+    <%= button_to "Destroy Goal!", goal_url(goal), method: :delete %>
+    <h5 style="font-family: arial padding: 0px">
+      is this goal complete?
+    </h5>  <p><%= goal.completion_status %></p>
+  <% elsif goal.privacy == false  %>
+    <%= goal.body %>
+    <h5 style="font-family: arial padding: 0px">
+      is this goal complete?
+    </h5>  <p><%= goal.completion_status %></p>
+  <% end %>
+
+
+<% end %>
+</ul>
+
+<form action="<%= goals_url %>" method="post">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <label>Goal
+    <input type="text" name="goal[body]" value="">
+  </label>
+  <label>Private
+    <input type="radio" name="goal[privacy]" value="true">
+  </label>
+  <label>Public
+    <input type="radio" name="goal[privacy]" value="false">
+  </label>
+  <br>
+  <input type="submit" value="Create Goal!">
+
+</form>
+<br>
+<%= link_to "All Users", users_url %>

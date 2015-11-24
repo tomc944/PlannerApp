@@ -2,6 +2,7 @@ require 'rails_helper'
 require 'spec_helper'
 
 def sign_up(username)
+  # FactoryGirl.build(:user, username: 'david')
   User.create(username: username, password: "password")
 end
 
