@@ -84,6 +84,12 @@ RSpec.configure do |config|
 =end
 end
 
+def create_goal(goal, private = "Public")
+  fill_in "Goal", with: goal
+  choose(private)
+  click_button "Create Goal"
+end
+
 def log_out_sign_in
   click_button "Log Out"
   click_on "Sign Up"
@@ -93,11 +99,11 @@ def log_out_sign_in
 end
 
 def create_gizmo_and_goal
-    visit "/users/new"
-    fill_in "Username", with: "Gizmo"
-    fill_in "Password", with: "password"
-    click_button "Sign Up"
-    create_goal("learn to juggle")
+  visit "/users/new"
+  fill_in "Username", with: "Gizmo"
+  fill_in "Password", with: "password"
+  click_button "Sign Up"
+  create_goal("learn to juggle")
 end
 
 def create_private_goal_and_navigate_to_gizmo

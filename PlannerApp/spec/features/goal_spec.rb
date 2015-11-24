@@ -1,15 +1,10 @@
+require 'byebug'
 require 'rails_helper'
 require 'spec_helper'
 
-def create_goal(goal, privacy = "Public")
-  fill_in "Goal", with: goal
-  choose(privacy)
-  click_button "Create Goal"
-end
-
-feature "goal creation and privacy" do
+feature "goal creation and private" do
   # let(:user) { User.create!() }
-  
+
   before :each do
     create_gizmo_and_goal
   end
@@ -36,8 +31,8 @@ feature "goal creation and privacy" do
 
 end
 
-feature "privacy and show pages" do
-  before :all do
+feature "private and show pages" do
+  before :each do
     create_gizmo_and_goal
     create_private_goal_and_navigate_to_gizmo
   end
